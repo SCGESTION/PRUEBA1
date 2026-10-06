@@ -16,6 +16,15 @@ Compatible con Mac Intel y Apple Silicon. Necesitas Git, Node.js **22 o posterio
    brew install git uv node
    ```
 
+   Si tienes versiones anteriores de Node o Git, activa los ejecutables de Homebrew en esta terminal:
+
+   ```bash
+   eval "$(brew shellenv)"
+   node --version
+   ```
+
+   Node debe mostrar una versión 22 o posterior. Esto resuelve el aviso de Homebrew sobre comandos `shadowed` por `/usr/local/bin/node` u otras rutas anteriores.
+
 2. Clona el proyecto y entra en la carpeta:
 
    ```bash
@@ -23,7 +32,17 @@ Compatible con Mac Intel y Apple Silicon. Necesitas Git, Node.js **22 o posterio
    cd PRUEBA1
    ```
 
-   Si el repositorio es privado, usa una cuenta de GitHub con acceso y la autenticación habitual de Git; no guardes tokens en archivos del proyecto.
+   Usa la URL **HTTPS** mostrada. `git@github.com:SCGESTION/PRUEBA1.git` utiliza SSH y requiere una clave autorizada; el error `Permission denied (publickey)` significa que GitHub ha rechazado esa autenticación. Si la clonación falla, resuelve el acceso y repítela antes de ejecutar `cd PRUEBA1` o los scripts.
+
+   Si HTTPS requiere autenticación porque el repositorio es privado, inicia sesión con una cuenta que tenga acceso mediante el navegador:
+
+   ```bash
+   brew install gh
+   gh auth login --hostname github.com --git-protocol https --web
+   gh auth setup-git
+   ```
+
+   Después repite `git clone`. No guardes tokens en archivos del proyecto.
 
 3. Instala las versiones del lockfile, compila la web y prepara una demostración:
 
