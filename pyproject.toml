@@ -1,0 +1,40 @@
+[project]
+name = "vector-platform"
+version = "0.1.0"
+description = "Vector Forge & Apex — training, community and competitions"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.34,<1",
+  "python-multipart>=0.0.20,<1",
+]
+
+[project.optional-dependencies]
+pose = [
+  "ultralytics==8.4.174",
+  "opencv-python==4.11.0.86",
+  "numpy==1.26.4",
+  "torch==2.5.1; sys_platform != 'darwin' or platform_machine != 'x86_64'",
+  "torchvision==0.20.1; sys_platform != 'darwin' or platform_machine != 'x86_64'",
+  "torch==2.2.2; sys_platform == 'darwin' and platform_machine == 'x86_64'",
+  "torchvision==0.17.2; sys_platform == 'darwin' and platform_machine == 'x86_64'",
+]
+
+[dependency-groups]
+dev = ["httpx>=0.28,<1", "pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["backend"]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+torchvision = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]

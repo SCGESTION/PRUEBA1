@@ -1,0 +1,13 @@
+# Validación realizada — 6 de octubre de 2026
+
+Ejecución en el entorno cloud Linux con Python 3.12 y Node 24. No se ha ejecutado esta instancia en un Mac; se incluyen instrucciones para Intel/Apple Silicon y CI con Ubuntu/macOS. Los resultados de CI se consultan en GitHub después de la subida.
+
+- **34 tests aprobados**: 18 de integración de API y 16 de contador/contrato Pose. Incluyen sesiones, límites de permisos, aislamiento de boxes y vídeos, inscripción, revisión y ranking, persistencia, claves foráneas y confirmación concurrente de inventario. El cálculo diario de stock admite reservas de días distintos sin sumarlas como si fueran simultáneas.
+- **TypeScript y build de Vite aprobados**. `npm audit` sin vulnerabilidades conocidas al comprobarlo. Fuentes servidas desde el proyecto, sin CDN externo.
+- **YOLO Pose real**: modelo oficial YOLO11n Pose v8.4.0 con SHA-256 publicado verificado. Carga e inferencia CPU completadas. Un MP4 negro de un segundo devuelve 0 repeticiones, tiempo/confianza nulos y resultado incompleto, con revisión humana. Esto prueba el circuito de ejecución, no la precisión deportiva.
+- **Navegador Chromium real**: login, sesión completada, inscripción presencial, subida MP4 con consentimiento y análisis hasta revisión; administración de entrenamientos sin carga, creación de reto Apex y box/responsable, revisión y rechazo del vídeo vacío; competición mixta Vector de box oficial, solicitud y confirmación de material; evento independiente de box normal; registro de atleta libre y catálogo sin acciones de alquiler. Las últimas comprobaciones no registran excepciones JavaScript ni fallos inesperados de API.
+- **Móvil**: dashboard y menú a 390 px sin desbordamiento horizontal; corrección del ancho mínimo del gráfico. Tiempos del ranking muestran centésimas y propagan correctamente el cambio de minuto.
+- **Instalación y procesos**: instalación con lockfiles y semilla demo repetible, instalación Pose repetida con verificación de pesos, inicio de servicios con comprobación funcional y parada de procesos propios. La detección de puertos utiliza SO_REUSEADDR para permitir reinicios tras TIME_WAIT.
+- **SQLite**: `integrity_check=ok` y `foreign_key_check` vacío en la base preparada. Las bases y vídeos usados por tests se guardan fuera de los datos demo retenidos.
+
+El ranking no contiene resultados demo inventados. Solo incluye el mejor intento aprobado por atleta. El motor actual analiza sentadillas al aire; todavía se necesita una muestra de vídeos deportivos etiquetados para medir su precisión. No se afirma que otras modalidades o movimientos estén validados por IA. Consulta POSE.md.
